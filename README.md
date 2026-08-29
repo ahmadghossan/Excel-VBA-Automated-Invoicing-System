@@ -32,9 +32,13 @@ This **Excel VBA Automated Invoicing System** is being developed as a practical 
 The project aims to transform a traditional Excel invoice workbook into a more structured application where users can create, save, retrieve, and eventually update invoices through a user-friendly interface while maintaining invoice records in structured Excel Tables.
 
 
-> ## Project Frontpage Preview
->![preview create invoice page](/image/CreateInvoiceUserFormPage-1.png)  
->  <br>
+> ## Project Frontpage Preview (WIP)
+### User form create invoice front page:
+![preview create invoice page](/image/CreateInvoiceUserFormPage.png)  
+
+### Printed Output invoice pdf example:
+![invoice ex](/image/invoiceExample.png)
+<br>
 
 <br>
 
