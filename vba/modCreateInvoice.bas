@@ -1,7 +1,7 @@
 Attribute VB_Name = "modCreateInvoice"
 Option Explicit
 
-Sub NewInvoice()
+Public Sub NewInvoice()
 
 Dim invNo As Long
 
@@ -9,37 +9,57 @@ With Sheet7
 
 invNo = .Range("V8")
 
-Range("J6:L6").ClearContents
-Range("V8:W11").ClearContents
-Range("K16:L16").ClearContents
-Range("H33:J45").ClearContents
-Range("P33:Q45").ClearContents
-Range("G22:L26").ClearContents
+Call ClearInvoiceForm
 
 Range("V8") = invNo + 1
 Range("V10") = Date
-Range("J6:L6") = "(draft)"
-Range("K16") = "(not selected)"
+
 
 End With
 
+End Sub
+
+Public Sub resetFormula()
+
+    Dim wsInput As Worksheet
+    Set wsInput = Sheet7
+
+    Dim i As Long
+    
+    For i = 33 To 47
+    
+    With wsInput
+    
+    .Cells(i, FindHeaderColumn(wsInput, 32, "Description")).Formula = "=IFERROR(VLOOKUP($H" & i & ",'Product Database'!A:G, 2,FALSE),"""")"
+    .Cells(i, FindHeaderColumn(wsInput, 32, "Unit")).Formula = "=IFERROR(VLOOKUP($H" & i & ",'Product Database'!A:G, 4,FALSE),"""")"
+    .Cells(i, FindHeaderColumn(wsInput, 32, "Price/Unit")).Formula = "=IFERROR(VLOOKUP($H" & i & " , 'Product Database'!A:G, 6, FALSE), """")"
+    
+    End With
+    
+    Next i
+        
 
 End Sub
 
-Sub ClearInvoiceForm()
+Public Sub ClearInvoiceForm()
 
-Range("J6:L6").ClearContents
-Range("V8:W11").ClearContents
-Range("K16:L16").ClearContents
-Range("H33:J45").ClearContents
-Range("P33:Q45").ClearContents
-Range("G22:L26").ClearContents
-Range("J6:L6") = "(draft)"
-Range("K16") = "(not selected)"
+    With Sheet7
+    
+    Range("J6:L6").ClearContents
+    Range("V8:W11").ClearContents
+    Range("K16:L16").ClearContents
+    Range("H33:J47").ClearContents
+    Range("P33:Q47").ClearContents
+    Range("G22:L26").ClearContents
+    Range("J6:L6") = "(draft)"
+    Range("K16") = "(not selected)"
+    
+    End With
+    
 
 End Sub
 
-Sub RecordInvoice()
+Public Sub RecordInvoice()
 
 If Sheet7.Range("selectedCust") = "(not selected)" Or _
     Sheet7.Range("selectedCust") = "" _
@@ -118,7 +138,7 @@ Call SaveInvoiceDetails
 
 End Sub
 
-Sub LoadInvoice()
+Public Sub LoadInvoice()
 
 
 Dim invName As String
@@ -192,7 +212,7 @@ Call LoadInvoiceDetails
 End Sub
 
 
-Sub SaveInvoiceDetails()
+Public Sub SaveInvoiceDetails()
 'sheet naming
     Dim wsInput As Worksheet
     Dim wsDB As Worksheet
@@ -202,7 +222,7 @@ Sub SaveInvoiceDetails()
 
     Dim invoiceName As String
 
-'find data column
+'data column
     Dim skuCol As Long
     Dim descCol As Long
     Dim unitCol As Long
@@ -254,7 +274,7 @@ Call DeleteInvoiceDetails
 
 'take data based on if SKU and Qty is filled for every row on create invoice
 
-    For r = 33 To 44
+    For r = 33 To 47
     
         If wsInput.Cells(r, skuCol) <> "" And _
             wsInput.Cells(r, qtyCol) > 0 Then _
@@ -277,7 +297,7 @@ Call DeleteInvoiceDetails
 
 End Sub
 
-Sub LoadInvoiceDetails()
+Public Sub LoadInvoiceDetails()
 
 Dim tblRow As Long
 Dim trgtRow As Long
@@ -289,11 +309,17 @@ Set tbl = Sheet10.ListObjects("tblInvoiceDetails")
 Dim invCol As Long
 invCol = tbl.ListColumns("Invoice_Name").Index
 
+'invoice details data
+
 Dim skuCol As Long
 Dim qtyCol As Long
+Dim descCol As Long
+Dim unitCol As Long
+Dim priceCol As Long
 
 skuCol = FindHeaderColumn(Sheet7, 32, "SKU")
 qtyCol = FindHeaderColumn(Sheet7, 32, "Qty")
+priceCol = FindHeaderColumn(Sheet7, 32, "Price/Unit")
 
 'which invoice to be search?
 Dim invName As String
@@ -316,6 +342,7 @@ Debug.Print "Selected: [" & invName & "]"
         
             Sheet7.Cells(trgtRow, skuCol) = tbl.DataBodyRange.Cells(tblRow, 2)
             Sheet7.Cells(trgtRow, qtyCol) = tbl.DataBodyRange.Cells(tblRow, 5)
+            
         
             trgtRow = trgtRow + 1
             
@@ -330,7 +357,7 @@ Debug.Print "Selected: [" & invName & "]"
 
 End Sub
 
-Sub DeleteInvoiceDetails()
+Public Sub DeleteInvoiceDetails()
 
 Dim invCol As Long
 Dim i As Long
