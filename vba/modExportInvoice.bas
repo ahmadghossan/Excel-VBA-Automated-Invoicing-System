@@ -1,7 +1,7 @@
 Attribute VB_Name = "modExportInvoice"
 Option Explicit
 
-Sub TransferInvoiceToTemplate()
+Public Sub TransferInvoiceToTemplate()
 
     ''set sheet variable
     Dim wsInput As Worksheet
@@ -92,34 +92,30 @@ Sub TransferInvoiceToTemplate()
 
 End Sub
 
-Sub exportToPdf()
+Public Sub exportToPdf()
 
-    ''ensure data detail is saved to invoice database
-    Call RecordInvoice
-
-    ''ensure invoice data is  the one selected
-    Call LoadInvoice
-    
-    ''Copy selected invoice data to template
-    Call TransferInvoiceToTemplate
-
+    ''invoice naming
     Dim invNo As Long
     Dim custName As String
     Dim dateIssued As Date
+    Dim fileName As String
     
     invNo = Sheet1.Range("J7").Value
     custName = Sheet1.Range("E12").Value
     dateIssued = Sheet1.Range("J9").Value
     
-    Dim savePath As String
-    Dim fileName As String
+    fileName = "INV-" & Year(dateIssued) & "-" & custName & "-" & invNo
     
     ''save pdf to allocated path
+    Dim savePath As String
     savePath = "C:\Users\ahmad\Documents\Aku\Project\Excel-VBA-Automated-Invoicing-System\invoice\"
-    fileName = "INV-" & Year(dateIssued) & "-" & custName & "-" & invNo
+
     Sheet1.ExportAsFixedFormat xlTypePDF, IgnorePrintAreas:=False, fileName:=savePath & fileName
     
+    ''save pdf link to invoice database
+    Dim invRow As Long
+    invRow = FindHeaderRow(Sheet3, "K:K", fileName)
     
-    '' to save the link to invoice database(from previous test) Sheet3.Hyperlinks.Add Anchor:=Sheet3.Cells(location), Address:=savePath & fileName & ".pdf"
-        ''WIP
+    Sheet3.Hyperlinks.Add Anchor:=Sheet3.Cells(invRow, "H:H"), Address:=savePath & fileName & ".pdf"
+    
 End Sub

@@ -3,19 +3,19 @@ Option Explicit
 
 Public Sub NewInvoice()
 
-Dim invNo As Long
-
-With Sheet7
-
-invNo = .Range("V8")
-
-Call ClearInvoiceForm
-
-Range("V8") = invNo + 1
-Range("V10") = Date
-
-
-End With
+    Dim invNo As Long
+    
+    With Sheet7
+    
+    invNo = .Range("V8")
+    
+    Call ClearInvoiceForm
+    
+    Range("V8") = invNo + 1
+    Range("V10") = Date
+    
+    
+    End With
 
 End Sub
 
@@ -61,79 +61,79 @@ End Sub
 
 Public Sub RecordInvoice()
 
-If Sheet7.Range("selectedCust") = "(not selected)" Or _
-    Sheet7.Range("selectedCust") = "" _
-Then
-    MsgBox ("Client/Customer not selected")
-    Exit Sub
+    If Sheet7.Range("selectedCust") = "(not selected)" Or _
+        Sheet7.Range("selectedCust") = "" _
+    Then
+        MsgBox ("Client/Customer not selected")
+        Exit Sub
+        
+    End If
     
-End If
-
-Dim invNo As Long
-Dim poNo As Long
-Dim custName As String
-Dim amt As Currency
-Dim dateIssued As Date
-Dim term As Long
-Dim nextRow As Long
-Dim foundInv As Range
-
-With Sheet7
-
-invNo = .Range("V8")
-poNo = .Range("V9")
-custName = .Range("K16")
-dateIssued = .Range("V10")
-term = .Range("V11")
-
-End With
-
-'detecting last row
-
-nextRow = Sheet3.Cells(Sheet3.Rows.Count, "A").End(xlUp).Row + 1
-
-'is invoice already recorded?
-
-Set foundInv = Sheet3.Range("A:A").Find(What:=invNo, LookIn:=xlValues, LookAt:=xlWhole)
-
-'make new row or is invoice already recorded?
-
-If foundInv Is Nothing Then
-
-    nextRow = nextRow
+    Dim invNo As Long
+    Dim poNo As Long
+    Dim custName As String
+    Dim amt As Currency
+    Dim dateIssued As Date
+    Dim term As Long
+    Dim nextRow As Long
+    Dim foundInv As Range
     
-Else
-
-    nextRow = foundInv.Row
-
-End If
-
-
-'record invoice
-
-Sheet7.Range("J6") = "INV-" & Year(dateIssued) & "-" & custName & "-" & invNo
-
-With Sheet3
+    With Sheet7
     
-.Cells(nextRow, "A").Value = invNo
-    .Cells(nextRow, "B").Value = poNo
-    .Cells(nextRow, "C").Value = custName
-    .Cells(nextRow, "D").Value = amt
-    .Cells(nextRow, "E").Value = dateIssued
-    .Cells(nextRow, "F").Value = dateIssued + term
-    .Cells(nextRow, "K").Value = "INV-" & Year(dateIssued) & "-" & custName & "-" & invNo
-
-If foundInv Is Nothing Then
-
-    Sheet3.Cells(nextRow, "G").Value = "Unpaid"
-
-End If
+    invNo = .Range("V8")
+    poNo = .Range("V9")
+    custName = .Range("K16")
+    dateIssued = .Range("V10")
+    term = .Range("V11")
     
-End With
-
-
-
-Call SaveInvoiceDetails
+    End With
+    
+    'detecting last row
+    
+    nextRow = Sheet3.Cells(Sheet3.Rows.Count, "A").End(xlUp).Row + 1
+    
+    'is invoice already recorded?
+    
+    Set foundInv = Sheet3.Range("A:A").Find(What:=invNo, LookIn:=xlValues, LookAt:=xlWhole)
+    
+    'make new row or is invoice already recorded?
+    
+    If foundInv Is Nothing Then
+    
+        nextRow = nextRow
+        
+    Else
+    
+        nextRow = foundInv.Row
+    
+    End If
+    
+    
+    'record invoice
+    
+    Sheet7.Range("J6") = "INV-" & Year(dateIssued) & "-" & custName & "-" & invNo
+    
+    With Sheet3
+        
+    .Cells(nextRow, "A").Value = invNo
+        .Cells(nextRow, "B").Value = poNo
+        .Cells(nextRow, "C").Value = custName
+        .Cells(nextRow, "D").Value = amt
+        .Cells(nextRow, "E").Value = dateIssued
+        .Cells(nextRow, "F").Value = dateIssued + term
+        .Cells(nextRow, "K").Value = "INV-" & Year(dateIssued) & "-" & custName & "-" & invNo
+    
+    If foundInv Is Nothing Then
+    
+        Sheet3.Cells(nextRow, "G").Value = "Unpaid"
+    
+    End If
+        
+    End With
+    
+    
+    
+    Call SaveInvoiceDetails
 
 
 End Sub
@@ -141,73 +141,77 @@ End Sub
 Public Sub LoadInvoice()
 
 
-Dim invName As String
-Dim invNo As Long
-Dim poNo As Long
-Dim custName As String
-Dim amt As Currency
-Dim dateIssued As Date
-Dim term As Long
-Dim invRow As Long
-Dim foundInv As Range
-
-invName = Sheet7.Range("J6")
-
-'is invname invalid?
-
-If UCase(Left(invName, 3)) <> "INV" Then
-    MsgBox "Invalid Invoice", vbQuestion, "Error"
-    Exit Sub
-End If
-
-'is invoice already recorded?
-
-Set foundInv = Sheet3.Range("K:K").Find(What:=invName, LookIn:=xlValues, LookAt:=xlWhole)
-
-'make new row or is invoice already recorded?
-
-If foundInv Is Nothing Then
-
-MsgBox "Invoice with the name " & invName & " can't be found", vbOKOnly, "Not Found"
-
-
-
+    Dim invName As String
+    Dim invNo As Long
+    Dim poNo As Long
+    Dim custName As String
+    Dim amt As Currency
+    Dim dateIssued As Date
+    Dim term As Long
+    Dim invRow As Long
+    Dim foundInv As Range
     
-Else
+    invName = Sheet7.Range("J6")
     
-    invRow = foundInv.Row
+    'is invname invalid?
     
-    Call ClearInvoiceForm
+    If UCase(Left(invName, 3)) <> "INV" Then
+        MsgBox "Invalid Invoice", vbQuestion, "Error"
+        Exit Sub
+    End If
     
-'record invoice details
-With Sheet3
+    'is invoice already recorded?
     
-    invNo = .Cells(invRow, "A").Value
-    poNo = .Cells(invRow, "B").Value
-    custName = .Cells(invRow, "C").Value
-    dateIssued = .Cells(invRow, "E").Value
-    term = .Cells(invRow, "F").Value - dateIssued
-
-End With
-
-
-'show record invoice details
+    Set foundInv = Sheet3.Range("K:K").Find(What:=invName, LookIn:=xlValues, LookAt:=xlWhole)
     
-With Sheet7
+    'make new row or is invoice already recorded?
+    
+    If foundInv Is Nothing Then
+    
+    MsgBox "Invoice with the name " & invName & " can't be found", vbOKOnly, "Not Found"
+    
+    
+    
+        
+    Else
+        
+        invRow = foundInv.Row
+        
+        Call ClearInvoiceForm
+        
+    'record invoice details
+    With Sheet3
+        
+        invNo = .Cells(invRow, "A").Value
+        poNo = .Cells(invRow, "B").Value
+        custName = .Cells(invRow, "C").Value
+        dateIssued = .Cells(invRow, "E").Value
+        term = .Cells(invRow, "F").Value - dateIssued
+    
+    End With
+    
+    
+    'show record invoice details
+        
+    With Sheet7
+    
+    .Range("V8") = invNo
+    .Range("V9") = poNo
+    .Range("K16") = custName
+    .Range("V10") = dateIssued
+    .Range("V11") = term
+    .Range("J6") = invName
+    
+    End With
+    
+    
+    End If
+    
+    ''Load invoice transaction details
+    Call LoadInvoiceDetails
 
-.Range("V8") = invNo
-.Range("V9") = poNo
-.Range("K16") = custName
-.Range("V10") = dateIssued
-.Range("V11") = term
-.Range("J6") = invName
-
-End With
-
-
-End If
-
-Call LoadInvoiceDetails
+    ''Copy selected invoice data to template
+    Call TransferInvoiceToTemplate
 
 End Sub
 
@@ -299,34 +303,34 @@ End Sub
 
 Public Sub LoadInvoiceDetails()
 
-Dim tblRow As Long
-Dim trgtRow As Long
-
-Dim tbl As ListObject
-Set tbl = Sheet10.ListObjects("tblInvoiceDetails")
-
-'where is invoice column?
-Dim invCol As Long
-invCol = tbl.ListColumns("Invoice_Name").Index
-
-'invoice details data
-
-Dim skuCol As Long
-Dim qtyCol As Long
-Dim descCol As Long
-Dim unitCol As Long
-Dim priceCol As Long
-
-skuCol = FindHeaderColumn(Sheet7, 32, "SKU")
-qtyCol = FindHeaderColumn(Sheet7, 32, "Qty")
-priceCol = FindHeaderColumn(Sheet7, 32, "Price/Unit")
-
-'which invoice to be search?
-Dim invName As String
-invName = Sheet7.Range("SelectedInvoice")
-
-'define first row of the item details
-trgtRow = 33
+    Dim tblRow As Long
+    Dim trgtRow As Long
+    
+    Dim tbl As ListObject
+    Set tbl = Sheet10.ListObjects("tblInvoiceDetails")
+    
+    'where is invoice column?
+    Dim invCol As Long
+    invCol = tbl.ListColumns("Invoice_Name").Index
+    
+    'invoice details data
+    
+    Dim skuCol As Long
+    Dim qtyCol As Long
+    Dim descCol As Long
+    Dim unitCol As Long
+    Dim priceCol As Long
+    
+    skuCol = FindHeaderColumn(Sheet7, 32, "SKU")
+    qtyCol = FindHeaderColumn(Sheet7, 32, "Qty")
+    priceCol = FindHeaderColumn(Sheet7, 32, "Price/Unit")
+    
+    'which invoice to be search?
+    Dim invName As String
+    invName = Sheet7.Range("SelectedInvoice")
+    
+    'define first row of the item details
+    trgtRow = 33
 
 
 
@@ -359,23 +363,23 @@ End Sub
 
 Public Sub DeleteInvoiceDetails()
 
-Dim invCol As Long
-Dim i As Long
-Dim tbl As ListObject
-
-Dim invName As String
-
-invName = Sheet7.Range("SelectedInvoice").Value
-
-'finding invoice name column
-
-invCol = FindHeaderColumn(Sheet10, 1, "Invoice_Name")
-
-'select tabble
-
-Set tbl = Sheet10.ListObjects("tblInvoiceDetails")
-
-'check ever row on table for last row table to fisrt
+    Dim invCol As Long
+    Dim i As Long
+    Dim tbl As ListObject
+    
+    Dim invName As String
+    
+    invName = Sheet7.Range("SelectedInvoice").Value
+    
+    'finding invoice name column
+    
+    invCol = FindHeaderColumn(Sheet10, 1, "Invoice_Name")
+    
+    'select tabble
+    
+    Set tbl = Sheet10.ListObjects("tblInvoiceDetails")
+    
+    'check ever row on table for last row table to fisrt
 
     For i = tbl.ListRows.Count To 1 Step -1
     

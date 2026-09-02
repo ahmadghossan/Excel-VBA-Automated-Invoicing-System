@@ -5,14 +5,27 @@
 ![VBA](https://img.shields.io/badge/VBA-Automation-blue?style=for-the-badge)
 
 
----
 
 
 > 🚧 **Project Status:** This project is currently under active development.  
 > Features and source code will continue to be updated as the system is expanded.
 
----
+## Changelog
 
+### September 2026
+- Added **Manage Invoice** page.
+  - Added scrollable invoice list.
+  - Added Status, Customer filtering.
+  - Added helper-range filtering using `FILTER()`, `LET()`, and `CHOOSECOLS()`.
+
+
+### August 2026
+- Added Create Invoice interface.
+- Added Save Invoice Details workflow.
+- Added Load Invoice Details workflow.
+- Added export invoice to PDF feature.
+
+<br>
 
 ## 📌 Project Overview & Problem Statement
 
@@ -36,15 +49,10 @@ The project aims to transform a traditional Excel invoice workbook into a more s
 ### User form create invoice front page:
 ![preview create invoice page](/image/CreateInvoiceUserFormPage.png)  
 
-### Printed Output invoice pdf example:
-![invoice ex](/image/invoiceExample.png)
-<br>
-
-<br>
 
 ## 🛠️ What I've Learned in this Project So far
 
-### 💻 VBA Programming Fundamentals
+### VBA Programming Fundamentals
 
 - Declaring variables using `Dim`.
 - Understanding VBA data types such as:
@@ -63,13 +71,10 @@ The project aims to transform a traditional Excel invoice workbook into a more s
 
 ---
 
-### 🔁 Control Flow & Data Processing
+### Control Flow & Data Processing
 
 - Using `For...Next` loops to process multiple invoice line items.
 - Using conditional logic with `If...Then`.
-- Filtering valid invoice rows based on SKU and quantity.
-- Using separate source and destination row counters.
-- Looping backwards when deleting database records to prevent skipped rows.
 
 Example:
 
@@ -85,7 +90,7 @@ Next i
 
 ---
 
-### 📊 Excel VBA Object Model
+### Excel VBA Object Model
 
 - Working with Excel VBA objects such as:
   - `Workbook`
@@ -99,23 +104,14 @@ Next i
 - Accessing Excel Tables using `ListObjects`.
 - Reading and writing data using `Cells(row, column)`.
 
-Example:
-
-```vb
-Set tbl = Sheet10.ListObjects("tblInvoiceDetails")
-```
-
-Worksheet reference:
-
-```vb
-Sheet7.Cells(targetRow, targetCol).Value
-```
-
-Table-relative reference:
-
-```vb
-tbl.DataBodyRange.Cells(tblRow, invoiceCol).Value
-```
-
 ---
+
+### Excel Formula
+  - Using `Let` function
+  - `choosecols`
+  - `filter`
+
+### Excel Form Control
+- Adding interactive elements such as scroll bars to create user friendly environment
+
 
