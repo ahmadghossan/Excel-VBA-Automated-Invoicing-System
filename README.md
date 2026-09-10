@@ -46,8 +46,10 @@ The project aims to transform a traditional Excel invoice workbook into a more s
 
 
 > ## Project Frontpage Preview (WIP)
-### User form create invoice front page:
+### 
+![preview manage invoice](/image/manageInvoice.png)
 ![preview create invoice page](/image/CreateInvoiceUserFormPage.png)  
+![invoice template](/image/invoiceExample.png)
 
 
 ## 🛠️ What I've Learned in this Project So far
