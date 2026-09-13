@@ -7,17 +7,17 @@
 ## Changelog
 
 ### September 2026
-- Added **Manage Invoice** page.
-  - Added preview invoice from active selected cell
-  - Added dynamic scrollable invoice list.
-  - Added Status, Customer, and aging filtering.
-  - Added helper-range filtering using `FILTER()`, `LET()`, and `CHOOSECOLS()`.
+- Added Manage Invoice page.
+- Added Status, Customer, and aging filtering.
+- Added helper-range filtering using `FILTER()`, `LET()`, and `CHOOSECOLS()`.
+- Added preview invoice from active selected cell
+- Added dynamic scrollable invoice list.
 
 
 ### August 2026
 - Added Create Invoice interface.
-- Added Save Invoice Details workflow.
-- Added Load Invoice Details workflow.
+- Added Save Invoice to databases workflow. 
+- Added Load Invoice from databases workflow.
 - Added export invoice to PDF feature.
 
 <br>
