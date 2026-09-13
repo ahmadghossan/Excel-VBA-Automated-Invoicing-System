@@ -1,9 +1,3 @@
-# 📑 Excel VBA Project: "Automated Invoicing System"
-
-![Project Status](https://img.shields.io/badge/Status-In%20Progress-yellow?style=for-the-badge)
-![Microsoft Excel](https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white)
-![VBA](https://img.shields.io/badge/VBA-Automation-blue?style=for-the-badge)
-
 
 
 
@@ -14,8 +8,9 @@
 
 ### September 2026
 - Added **Manage Invoice** page.
-  - Added scrollable invoice list.
-  - Added Status, Customer filtering.
+  - Added preview invoice from active selected cell
+  - Added dynamic scrollable invoice list.
+  - Added Status, Customer, and aging filtering.
   - Added helper-range filtering using `FILTER()`, `LET()`, and `CHOOSECOLS()`.
 
 
@@ -27,30 +22,46 @@
 
 <br>
 
-## 📌 Project Overview & Problem Statement
+# 📑 Excel VBA Project: "Automated Invoicing System"
 
-Managing invoices manually in Excel can become repetitive and increasingly difficult as the number of customers, products, and transactions grows.
-
-Common challenges include:
-
-- Re-entering customer and product information for every invoice.
-- Maintaining multiple invoice line items manually.
-- Preventing duplicate invoice records.
-- Retrieving previously created invoices for review or editing.
-- Keeping invoice data structured for future reporting and analysis.
-- Maintaining consistency between the invoice form and the underlying transaction database.
-
-This **Excel VBA Automated Invoicing System** is being developed as a practical business automation project using Microsoft Excel and VBA.
-
-The project aims to transform a traditional Excel invoice workbook into a more structured application where users can create, save, retrieve, and eventually update invoices through a user-friendly interface while maintaining invoice records in structured Excel Tables.
+![Project Status](https://img.shields.io/badge/Status-In%20Progress-yellow?style=for-the-badge)
+![Microsoft Excel](https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white)
+![VBA](https://img.shields.io/badge/VBA-Automation-blue?style=for-the-badge)
 
 
-> ## Project Frontpage Preview (WIP)
-### 
-![preview manage invoice](/image/manageInvoice.png)
-![preview create invoice page](/image/CreateInvoiceUserFormPage.png)  
-![invoice template](/image/invoiceExample.png)
+> An **Microsoft Excel + VBA** invoice management system designed to create, store, search, manage, and export invoices to PDF from a single workbook.
 
+## Project Overview
+
+This project was developed to simplify invoice administration that would otherwise be handled manually. Excel is used as both the user interface and a lightweight database, while VBA manages automation such as invoice creation, transaction storage, invoice searching, filtering, and PDF export.
+
+**Project Type:** Excel Automation / Invoice Management  
+**Technology:** Microsoft Excel, VBA, Excel Tables, Form Controls, Lookup Formulas  
+**File Format:** `.xlsm`
+
+---
+
+## Preview
+
+### Manage Invoice
+
+![Manage Invoice](./image/manageInvoice.png)
+
+The **Manage Invoice** page is used to review invoice records and inspect invoice details without opening the raw database. Users can filter invoices by status, customer, and aging.
+
+### Create / Edit Invoice
+
+![Create Invoice](./image/CreateInvoiceUserFormPage.png)
+
+The **Create/Edit Invoice** page is used to create new invoices or load existing invoices for editing. Products are selected by SKU, and product information is retrieved automatically from the Product Database.
+
+### Invoice Output
+
+![Invoice Output](./image/invoiceExample.png)
+
+Completed invoice data is transferred into a printable invoice template that can be printed directly or exported as a PDF file.
+
+---
 
 ## 🛠️ What I've Learned in this Project So far
 
@@ -109,9 +120,8 @@ Next i
 ---
 
 ### Excel Formula
-  - Using `Let` function
-  - `choosecols`
-  - `filter`
+  - Using `Let, choosecols, and filter` function to create dynamic display
+  - Lookup funtion to retrieve data from databases 
 
 ### Excel Form Control
 - Adding interactive elements such as scroll bars to create user friendly environment
