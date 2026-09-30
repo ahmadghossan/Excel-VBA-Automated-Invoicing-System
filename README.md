@@ -4,21 +4,17 @@
 > 🚧 **Project Status:** This project is currently under active development.  
 > Features and source code will continue to be updated as the system is expanded.
 
-## Changelog
+## How to View the Demo
 
-### September 2026
-- Added Manage Invoice page.
-- Added Status, Customer, and aging filtering.
-- Added helper-range filtering using `FILTER()`, `LET()`, and `CHOOSECOLS()`.
-- Added preview invoice from active selected cell
-- Added dynamic scrollable invoice list.
+To explore the working demo:
 
+1. Download and open `AutomatedInvoiceSystem-Main.xlsm` located in `\vba`
+2. If Excel opens the workbook in **Protected View**, click **Enable Editing**.
+3. When the macro security warning appears, click **Enable Content** so the VBA features can run.
+4. Open the **Manage Invoice** page to browse the sample invoice database. Try filtering invoices by **Status**, **Client**, or **Aging**, then select an invoice to view its details.
+5. Open **Create/Edit Invoice** to see the invoice-entry workflow. You can create a new invoice or load an existing invoice from the sample data.
+6. Use the invoice template to preview the printable output.
 
-### August 2026
-- Added Create Invoice interface.
-- Added Save Invoice to databases workflow. 
-- Added Load Invoice from databases workflow.
-- Added export invoice to PDF feature.
 
 <br>
 
@@ -43,17 +39,26 @@ This project was developed to simplify invoice administration that would otherwi
 
 ## Preview
 
+### Dashboard Overview
+
+![Dashboard Overview](./image/Dashboard.png)
+
+Centralized visual analytics panel for the management to track accounts receivable (AR), The **Dashboard Overview** provides a dynamic, live data feed that automatically updates along with any changes made to the invoicing system. Built using Pivot Table, Pivot Charts, and Slicers. 
+
 ### Manage Invoice
 
 ![Manage Invoice](./image/manageInvoice.png)
 
-The **Manage Invoice** page is used to review invoice records and inspect invoice details without opening the raw database. Users can filter invoices by status, customer, and aging.
+The **Manage Invoice** page is used to review invoice records and inspect invoice details without opening the raw database. Users can filter invoices by status, customer, and aging. Built using a filter formula to simulate a dynamic table based on applied filters.
+
 
 ### Create / Edit Invoice
 
 ![Create Invoice](./image/CreateInvoiceUserFormPage.png)
 
-The **Create/Edit Invoice** page is used to create new invoices or load existing invoices for editing. Products are selected by SKU, and product information is retrieved automatically from the Product Database.
+The **Create/Edit Invoice** page is used to create new invoices or load existing invoices for editing. Products are selected by SKU, and product information is retrieved automatically from the Product Database. 
+
+This is where the I mainly use a VBA macros to manipulate, mantain and organize the all the invoice database. 
 
 ### Invoice Output
 
