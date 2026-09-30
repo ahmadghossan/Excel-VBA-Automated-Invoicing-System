@@ -25,17 +25,11 @@ To explore the working demo:
 ![VBA](https://img.shields.io/badge/VBA-Automation-blue?style=for-the-badge)
 
 
-> An **Microsoft Excel + VBA** invoice management system designed to create, store, search, manage, and export invoices to PDF from a single workbook.
-
 ## Project Overview
 
-This project was developed to simplify invoice administration that would otherwise be handled manually. Excel is used as both the user interface and a lightweight database, while VBA manages automation such as invoice creation, transaction storage, invoice searching, filtering, and PDF export.
+This project was developed purely as an educational tool to study, practice, and apply the implementation of Excel VBA Macros and automated data workflows. Excel serves as both the user interface and a lightweight database, utilizing VBA to manage automation tasks like invoice creation, transaction storage, searching, filtering, and PDF exports. 
 
-**Project Type:** Excel Automation / Invoice Management  
-**Technology:** Microsoft Excel, VBA, Excel Tables, Form Controls, Lookup Formulas  
-**File Format:** `.xlsm`
-
----
+A side feature of this system is the Dashboard Overview for a Data Visualization, combined with VBA Macros and Pivot Table, creates a dynamic, live data feed that updates in real time as database records change. 
 
 ## Preview
 
