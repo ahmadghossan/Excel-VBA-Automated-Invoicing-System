@@ -4,18 +4,6 @@
 > 🚧 **Project Status:** This project is currently under active development.  
 > Features and source code will continue to be updated as the system is expanded.
 
-## How to View the Demo
-
-To explore the working demo:
-
-1. Download and open `AutomatedInvoiceSystem-Main.xlsm` located in `\vba`
-2. If Excel opens the workbook in **Protected View**, click **Enable Editing**.
-3. When the macro security warning appears, click **Enable Content** so the VBA features can run.
-4. Open the **Manage Invoice** page to browse the sample invoice database. Try filtering invoices by **Status**, **Client**, or **Aging**, then select an invoice to view its details.
-5. Open **Create/Edit Invoice** to see the invoice-entry workflow. You can create a new invoice or load an existing invoice from the sample data.
-6. Use the invoice template to preview the printable output.
-
-
 <br>
 
 # 📑 Excel VBA Project: "Automated Invoicing System"
