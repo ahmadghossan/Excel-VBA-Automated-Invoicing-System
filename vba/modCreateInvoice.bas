@@ -4,16 +4,17 @@ Option Explicit
 Public Sub NewInvoice()
 
     Dim invNo As Long
-    
-    With Sheet7
-    
-    invNo = .Range("V8")
+    Dim tbl As ListObject
     
     Call ClearInvoiceForm
     
-    Range("V8") = invNo + 1
-    Range("V10") = Date
+    Set tbl = Sheet3.ListObjects("InvoiceDatabase")
+       
+    With Sheet7
     
+        invNo = tbl.ListRows.Count
+        Range("V8") = invNo + 1
+        Range("V10") = Date
     
     End With
 
@@ -55,7 +56,6 @@ Public Sub ClearInvoiceForm()
     Range("K16") = "(not selected)"
     
     End With
-    
 
 End Sub
 
@@ -85,6 +85,7 @@ Public Sub RecordInvoice()
     custName = .Range("K16")
     dateIssued = .Range("V10")
     term = .Range("V11")
+    amt = .Range("U54")
     
     End With
     
@@ -169,9 +170,6 @@ Public Sub LoadInvoice()
     If foundInv Is Nothing Then
     
     MsgBox "Invoice with the name " & invName & " can't be found", vbOKOnly, "Not Found"
-    
-    
-    
         
     Else
         
@@ -187,6 +185,7 @@ Public Sub LoadInvoice()
         custName = .Cells(invRow, "C").Value
         dateIssued = .Cells(invRow, "E").Value
         term = .Cells(invRow, "F").Value - dateIssued
+        
     
     End With
     
@@ -309,7 +308,7 @@ Public Sub LoadInvoiceDetails()
     Dim tbl As ListObject
     Set tbl = Sheet10.ListObjects("tblInvoiceDetails")
     
-    'where is invoice column?
+    'search invoice name column
     Dim invCol As Long
     invCol = tbl.ListColumns("Invoice_Name").Index
     
@@ -334,13 +333,8 @@ Public Sub LoadInvoiceDetails()
 
 
 
-'take data from row if inv name the same
+    'take data from row if inv name the same
     For tblRow = 1 To tbl.ListRows.Count
-    
-    Debug.Print "Row: " & tblRow
-Debug.Print "DB Invoice: [" & _
-    tbl.DataBodyRange.Cells(tblRow, invCol).Value & "]"
-Debug.Print "Selected: [" & invName & "]"
     
         If tbl.DataBodyRange(tblRow, invCol) = invName Then _
         
@@ -354,10 +348,6 @@ Debug.Print "Selected: [" & invName & "]"
         
     
     Next tblRow
-    
-
-
-
 
 End Sub
 
